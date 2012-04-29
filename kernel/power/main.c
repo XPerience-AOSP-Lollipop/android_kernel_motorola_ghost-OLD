@@ -497,6 +497,43 @@ static ssize_t wakeup_count_store(struct kobject *kobj,
 power_attr(wakeup_count);
 #endif /* CONFIG_PM_SLEEP */
 
+#ifdef CONFIG_PM_WAKELOCKS
+static ssize_t wake_lock_show(struct kobject *kobj,
+			      struct kobj_attribute *attr,
+			      char *buf)
+{
+	return pm_show_wakelocks(buf, true);
+}
+
+static ssize_t wake_lock_store(struct kobject *kobj,
+			       struct kobj_attribute *attr,
+			       const char *buf, size_t n)
+{
+	int error = pm_wake_lock(buf);
+	return error ? error : n;
+}
+
+power_attr(wake_lock);
+
+static ssize_t wake_unlock_show(struct kobject *kobj,
+				struct kobj_attribute *attr,
+				char *buf)
+{
+	return pm_show_wakelocks(buf, false);
+}
+
+static ssize_t wake_unlock_store(struct kobject *kobj,
+				 struct kobj_attribute *attr,
+				 const char *buf, size_t n)
+{
+	int error = pm_wake_unlock(buf);
+	return error ? error : n;
+}
+
+power_attr(wake_unlock);
+
+#endif /* CONFIG_PM_WAKELOCKS */
+
 #ifdef CONFIG_PM_TRACE
 int pm_trace_enabled;
 
@@ -557,6 +594,10 @@ static struct attribute *g[] = {
 	&touch_event_timer_attr.attr,
 #ifdef CONFIG_PM_DEBUG
 	&pm_test_attr.attr,
+#endif
+#ifdef CONFIG_PM_WAKELOCKS
+	&wake_lock_attr.attr,
+	&wake_unlock_attr.attr,
 #endif
 #ifdef CONFIG_USER_WAKELOCK
 	&wake_lock_attr.attr,
