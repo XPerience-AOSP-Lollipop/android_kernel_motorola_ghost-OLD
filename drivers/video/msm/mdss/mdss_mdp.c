@@ -96,6 +96,7 @@ static struct msm_bus_scale_pdata mdp_bus_scale_table = {
 
 struct mdss_hw mdss_mdp_hw = {
 	.hw_ndx = MDSS_HW_MDP,
+	.ptr = NULL,
 	.irq_handler = mdss_mdp_isr,
 };
 
@@ -110,7 +111,7 @@ static inline int mdss_irq_dispatch(u32 hw_ndx, int irq, void *ptr)
 	hw = mdss_irq_handlers[hw_ndx];
 	spin_unlock(&mdss_lock);
 	if (hw)
-		return hw->irq_handler(irq, ptr);
+		return hw->irq_handler(irq, hw->ptr);
 
 	return -ENODEV;
 }
