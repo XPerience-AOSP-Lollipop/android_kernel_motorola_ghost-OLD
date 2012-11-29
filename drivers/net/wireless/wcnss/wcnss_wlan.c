@@ -40,6 +40,7 @@
 #ifdef CONFIG_WCNSS_MEM_PRE_ALLOC
 #include "wcnss_prealloc.h"
 #endif
+#include <asm/system_info.h>
 
 #define DEVICE "wcnss_wlan"
 #define VERSION "1.01"
@@ -1170,6 +1171,9 @@ wcnss_wlan_probe(struct platform_device *pdev)
 		return -ENOMEM;
 	}
 	penv->pdev = pdev;
+
+	/* populate serial_number during init */
+	penv->serial_number = system_serial_low;
 
 	/* register sysfs entries */
 	ret = wcnss_create_sysfs(&pdev->dev);
