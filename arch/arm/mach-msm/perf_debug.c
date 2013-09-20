@@ -31,6 +31,7 @@ static char *descriptions =
 	"12 Perf: Make per-process counters configurable\n"
 	"13 msm: perf: Add L2 support for tracecounters\n"
 	"15 Perf: bring CPU online if needed when disabling irq\n"
+	"17 msm: perf: initialise krait perf L2 counter enables\n"
 ;
 
 static ssize_t desc_read(struct file *fp, char __user *buf,
