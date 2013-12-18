@@ -35,6 +35,7 @@ static char *descriptions =
 	"18 msm: perf: clean up duplicate constraint events\n"
 	"19 Perf: Make per-process counters cumulative\n"
 	"20 Perf: Fix PID for tracepoints\n"
+	"22 msm: perf: fix formatting of trace entry\n"
 ;
 
 static ssize_t desc_read(struct file *fp, char __user *buf,
