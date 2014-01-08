@@ -36,6 +36,7 @@ static char *descriptions =
 	"19 Perf: Make per-process counters cumulative\n"
 	"20 Perf: Fix PID for tracepoints\n"
 	"22 msm: perf: fix formatting of trace entry\n"
+	"23 msm: perf: Fix cpu id logic in tracectr notifier\n"
 ;
 
 static ssize_t desc_read(struct file *fp, char __user *buf,
