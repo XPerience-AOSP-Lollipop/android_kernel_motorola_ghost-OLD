@@ -839,7 +839,6 @@ static int __init vfp_rootfs_init(void)
 	else
 		pr_err("Failed to create procfs node for VFP bounce reporting\n");
 #endif
-
 	return 0;
 }
 
