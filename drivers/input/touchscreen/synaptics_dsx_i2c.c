@@ -3499,6 +3499,14 @@ static void synaptics_rmi4_sensor_one_touch(
  */
 static void synaptics_rmi4_sensor_sleep(struct synaptics_rmi4_data *rmi4_data)
 {
+
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+	if ((s2w_switch > 0) || (dt2w_switch > 0)) {
+		pr_info("sleep avoided!\n");
+		return;
+	} else {
+#endif
+
 	int retval;
 	unsigned char device_ctrl;
 	unsigned char clear_mask = MASK_2BIT;
@@ -3545,6 +3553,9 @@ static void synaptics_rmi4_sensor_sleep(struct synaptics_rmi4_data *rmi4_data)
 		rmi4_data->sensor_sleep = true;
 	}
 
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+	}
+#endif
 	return;
 }
 
@@ -3557,6 +3568,13 @@ static void synaptics_rmi4_sensor_sleep(struct synaptics_rmi4_data *rmi4_data)
  */
 static void synaptics_rmi4_sensor_wake(struct synaptics_rmi4_data *rmi4_data)
 {
+
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+	if ((s2w_switch > 0) || (dt2w_switch > 0)) {
+		pr_info("wake avoided!\n");
+		return;
+	} else {
+#endif
 	int retval;
 	unsigned char device_ctrl;
 	unsigned char clear_mask = MASK_3BIT;
@@ -3590,6 +3608,9 @@ static void synaptics_rmi4_sensor_wake(struct synaptics_rmi4_data *rmi4_data)
 		rmi4_data->sensor_sleep = false;
 	}
 
+#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+	}
+#endif
 	return;
 }
 
