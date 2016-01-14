@@ -39,14 +39,6 @@
 #include "acpuclock-krait.h"
 #include "avs.h"
 
-#ifdef CONFIG_CPU_OVERCLOCK
-#define OVERCLOCK_EXTRA_FREQS	7
-#else
-#define OVERCLOCK_EXTRA_FREQS	0
-#endif
-
-#define FREQ_TABLE_SIZE		(35 + OVERCLOCK_EXTRA_FREQS)
-
 /* MUX source selects. */
 #define PRI_SRC_SEL_SEC_SRC	0
 #define PRI_SRC_SEL_HFPLL	1
@@ -1014,7 +1006,7 @@ void acpuclk_set_vdd(unsigned int khz, int vdd_uv) {
 #endif	/* CONFIG_CPU_VOTALGE_TABLE */
 
 #ifdef CONFIG_CPU_FREQ_MSM
-static struct cpufreq_frequency_table freq_table[NR_CPUS][FREQ_TABLE_SIZE];
+static struct cpufreq_frequency_table freq_table[NR_CPUS][35];
 
 static void __init cpufreq_table_init(void)
 {
