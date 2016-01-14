@@ -60,10 +60,6 @@ struct cpu_freq {
 
 static DEFINE_PER_CPU(struct cpu_freq, cpu_freq_info);
 
-#ifdef CONFIG_TURBO_BOOST
-extern int msm_turbo(int);
-#endif
-
 static int set_cpu_freq(struct cpufreq_policy *policy, unsigned int new_freq)
 {
 	int ret = 0;
