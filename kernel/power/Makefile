@@ -1,3 +1,4 @@
+KBUILD_CFLAGS := -Wno-implicit-function-declaration
 
 ccflags-$(CONFIG_PM_DEBUG)	:= -DDEBUG
 

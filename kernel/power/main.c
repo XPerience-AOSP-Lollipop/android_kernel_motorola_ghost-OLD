@@ -498,14 +498,14 @@ power_attr(wakeup_count);
 #endif /* CONFIG_PM_SLEEP */
 
 #ifdef CONFIG_PM_WAKELOCKS
-static ssize_t wake_lock_show(struct kobject *kobj,
+ssize_t wake_lock_show(struct kobject *kobj,
 			      struct kobj_attribute *attr,
 			      char *buf)
 {
 	return pm_show_wakelocks(buf, true);
 }
 
-static ssize_t wake_lock_store(struct kobject *kobj,
+ssize_t wake_lock_store(struct kobject *kobj,
 			       struct kobj_attribute *attr,
 			       const char *buf, size_t n)
 {
@@ -515,14 +515,14 @@ static ssize_t wake_lock_store(struct kobject *kobj,
 
 power_attr(wake_lock);
 
-static ssize_t wake_unlock_show(struct kobject *kobj,
+ssize_t wake_unlock_show(struct kobject *kobj,
 				struct kobj_attribute *attr,
 				char *buf)
 {
 	return pm_show_wakelocks(buf, false);
 }
 
-static ssize_t wake_unlock_store(struct kobject *kobj,
+ssize_t wake_unlock_store(struct kobject *kobj,
 				 struct kobj_attribute *attr,
 				 const char *buf, size_t n)
 {
@@ -576,11 +576,6 @@ power_attr(pm_trace_dev_match);
 
 #endif /* CONFIG_PM_TRACE */
 
-#ifdef CONFIG_USER_WAKELOCK
-power_attr(wake_lock);
-power_attr(wake_unlock);
-#endif
-
 static struct attribute *g[] = {
 	&state_attr.attr,
 #ifdef CONFIG_PM_TRACE
@@ -596,10 +591,6 @@ static struct attribute *g[] = {
 	&pm_test_attr.attr,
 #endif
 #ifdef CONFIG_PM_WAKELOCKS
-	&wake_lock_attr.attr,
-	&wake_unlock_attr.attr,
-#endif
-#ifdef CONFIG_USER_WAKELOCK
 	&wake_lock_attr.attr,
 	&wake_unlock_attr.attr,
 #endif
