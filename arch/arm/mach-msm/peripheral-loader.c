@@ -183,7 +183,7 @@ static int load_segment(const struct elf32_phdr *phdr, unsigned num,
 			return ret;
 		}
 
-		if (fw->size != phdr->p_filesz) {
+		if (fw && fw->size != phdr->p_filesz) {
 			dev_err(&pil->dev, "%s: Blob size %u doesn't match "
 					"%u\n", pil->desc->name, fw->size,
 					phdr->p_filesz);
@@ -278,7 +278,7 @@ static int load_image(struct pil_device *pil)
 		goto out;
 	}
 
-	if (fw->size < sizeof(*ehdr)) {
+	if (fw == NULL || fw->size < sizeof(*ehdr)) {
 		dev_err(&pil->dev, "%s: Not big enough to be an elf header\n",
 				pil->desc->name);
 		ret = -EIO;

@@ -127,8 +127,9 @@ static void riva_post_bootup(struct work_struct *work)
 
 	pr_debug(MODULE_NAME ": Cancel APPS vote for Iris & Riva\n");
 
-	wcnss_wlan_power(&pdev->dev, pwlanconfig,
-		WCNSS_WLAN_SWITCH_OFF);
+	if (pwlanconfig != NULL)
+		wcnss_wlan_power(&pdev->dev, pwlanconfig,
+			WCNSS_WLAN_SWITCH_OFF);
 }
 
 /* Subsystem handlers */
